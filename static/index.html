@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Misinformation & Deepfake Detection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Welcome Screen -->
+    <div class="welcome-screen" id="welcome-screen">
+        <div class="welcome-content">
+            <div class="welcome-logo">
+                <i class="fas fa-shield-virus"></i>
+            </div>
+            <h1 class="welcome-title">CyberGuard AI</h1>
+            <p class="welcome-subtitle">Next-Generation Misinformation & Deepfake Detection</p>
+            <div class="loading-container">
+                <div class="loading-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <p class="loading-text">Initializing AI Systems...</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-container" id="main-app" style="display: none;">
+
+        
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-shield-virus"></i>
+                    <h1>CyberGuard AI</h1>
+                </div>
+                <p class="subtitle">Next-Generation Misinformation & Deepfake Detection</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Analysis Type Selection -->
+                <div class="analysis-type-section">
+                    <div class="section-header">
+                        <i class="fas fa-search"></i>
+                        <h2>Choose Analysis Type</h2>
+                        <p>Select the type of content you want to analyze for misinformation or manipulation</p>
+                    </div>
+                    
+                    <div class="analysis-options">
+                        <div class="analysis-option active" onclick="showTab('text')" data-tab="text">
+                            <div class="option-icon">
+                                <i class="fas fa-newspaper"></i>
+                            </div>
+                            <div class="option-content">
+                                <h3>Text Analysis</h3>
+                                <p>Detect fake news, misinformation, and biased content in articles and posts</p>
+                                <div class="option-features">
+                                    <span class="feature-tag">Sentiment Analysis</span>
+                                    <span class="feature-tag">Fact Checking</span>
+                                    <span class="feature-tag">Bias Detection</span>
+                                </div>
+                            </div>
+                            <div class="option-indicator">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="analysis-option" onclick="showTab('image')" data-tab="image">
+                            <div class="option-icon">
+                                <i class="fas fa-image"></i>
+                            </div>
+                            <div class="option-content">
+                                <h3>Image Analysis</h3>
+                                <p>Identify deepfakes, manipulated photos, and AI-generated images</p>
+                                <div class="option-features">
+                                    <span class="feature-tag">Deepfake Detection</span>
+                                    <span class="feature-tag">Manipulation Check</span>
+                                    <span class="feature-tag">AI Generation</span>
+                                </div>
+                            </div>
+                            <div class="option-indicator">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="analysis-option" onclick="showTab('video')" data-tab="video">
+                            <div class="option-icon">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <div class="option-content">
+                                <h3>Video Analysis</h3>
+                                <p>Detect deepfake videos, face swaps, and synthetic media content</p>
+                                <div class="option-features">
+                                    <span class="feature-tag">Face Swap Detection</span>
+                                    <span class="feature-tag">Synthetic Media</span>
+                                    <span class="feature-tag">Frame Analysis</span>
+                                </div>
+                            </div>
+                            <div class="option-indicator">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text Analysis Tab -->
+                <div id="text-tab" class="tab-content active">
+                    <div class="analysis-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-newspaper"></i> Fake News & Misinformation Detection</h2>
+                            <p>Analyze text using multiple fact-checking APIs and linguistic pattern analysis</p>
+                        </div>
+
+                        <div class="input-section">
+                            <label for="text-input" class="input-label">
+                                <i class="fas fa-edit"></i>
+                                Enter news article, social media post, or any text to analyze
+                            </label>
+                            <textarea id="text-input" class="text-input"
+                                placeholder="Paste the text you want to analyze for misinformation patterns..."
+                                rows="8"></textarea>
+
+                            <button id="analyze-text-btn" class="analyze-btn primary" onclick="analyzeText()">
+                                <span id="text-btn-text">
+                                    <i class="fas fa-search"></i>
+                                    Analyze for Misinformation
+                                </span>
+                                <div id="text-spinner" class="spinner hidden">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Analysis Tab -->
+                <div id="image-tab" class="tab-content">
+                    <div class="analysis-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-image"></i> Deepfake Image Detection</h2>
+                            <p>Detect manipulated images and deepfakes using Google Gemini Pro Vision AI</p>
+                        </div>
+
+                        <div class="input-section">
+                            <label class="input-label">
+                                <i class="fas fa-upload"></i>
+                                Upload image to analyze for deepfakes
+                            </label>
+
+                            <div class="file-upload-zone" onclick="document.getElementById('image-input').click()">
+                                <input type="file" id="image-input" accept="image/*" onchange="handleImageSelect()" hidden>
+                                <div id="upload-placeholder" class="upload-placeholder">
+                                    <div class="upload-icon">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                    </div>
+                                    <h3>Drop image here or click to browse</h3>
+                                    <p>Supported formats: JPG, PNG, GIF, WebP</p>
+                                    <p class="file-limit">Maximum file size: 10MB</p>
+                                </div>
+                                <div id="image-preview" class="image-preview hidden"></div>
+                            </div>
+
+                            <button id="analyze-image-btn" class="analyze-btn secondary" onclick="analyzeImage()" disabled>
+                                <span id="image-btn-text">
+                                    <i class="fas fa-search"></i>
+                                    Analyze for Deepfakes
+                                </span>
+                                <div id="image-spinner" class="spinner hidden">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Analysis Tab -->
+                <div id="video-tab" class="tab-content">
+                    <div class="analysis-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-video"></i> Deepfake Video Detection</h2>
+                            <p>Analyze videos for deepfakes and manipulation by examining multiple frames</p>
+                        </div>
+
+                        <div class="input-section">
+                            <label class="input-label">
+                                <i class="fas fa-upload"></i>
+                                Upload video to analyze for deepfakes
+                            </label>
+
+                            <div class="file-upload-zone" onclick="document.getElementById('video-input').click()">
+                                <input type="file" id="video-input" accept="video/*" onchange="handleVideoSelect()" hidden>
+                                <div id="video-upload-placeholder" class="upload-placeholder">
+                                    <div class="upload-icon">
+                                        <i class="fas fa-video"></i>
+                                    </div>
+                                    <h3>Drop video here or click to browse</h3>
+                                    <p>Supported formats: MP4, AVI, MOV, WebM</p>
+                                    <p class="file-limit">Maximum file size: 100MB</p>
+                                </div>
+                                <div id="video-preview" class="video-preview hidden"></div>
+                            </div>
+
+                            <button id="analyze-video-btn" class="analyze-btn tertiary" onclick="analyzeVideo()" disabled>
+                                <span id="video-btn-text">
+                                    <i class="fas fa-search"></i>
+                                    Analyze for Deepfakes
+                                </span>
+                                <div id="video-spinner" class="spinner hidden">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Error Message -->
+                <div id="error-message" class="error-alert hidden">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span id="error-text"></span>
+                    <button class="close-btn" onclick="hideError()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <!-- Results Section -->
+                <div id="results" class="results-section hidden">
+                    <div class="results-header">
+                        <h2><i class="fas fa-chart-line"></i> Analysis Results</h2>
+                        <button class="export-btn" onclick="exportResults()">
+                            <i class="fas fa-download"></i>
+                            Export
+                        </button>
+                    </div>
+
+                    <div class="results-grid">
+                        <!-- Risk Assessment Card -->
+                        <div class="result-card risk-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-shield-alt"></i> Risk Assessment</h3>
+                            </div>
+                            <div class="card-content">
+                                <div id="risk-badge" class="risk-badge"></div>
+                                <div id="scores" class="scores-grid"></div>
+                                <div class="risk-meter">
+                                    <div class="meter-track">
+                                        <div id="risk-meter-fill" class="meter-fill"></div>
+                                    </div>
+                                    <div class="meter-labels">
+                                        <span>Low</span>
+                                        <span>Medium</span>
+                                        <span>High</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Analysis Details Card -->
+                        <div class="result-card analysis-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-microscope"></i> Analysis Details</h3>
+                            </div>
+                            <div class="card-content">
+                                <div id="analysis-content" class="analysis-details"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recommendations Card -->
+                    <div class="result-card recommendations-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-lightbulb"></i> Recommendations</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul id="recommendations-list" class="recommendations-list"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- API Configuration Info -->
+        <div class="api-info-section">
+            <div class="container">
+                <div class="api-info-card">
+                    <h3><i class="fas fa-cog"></i> API Configuration</h3>
+                    <div class="api-grid">
+                        <div class="api-item">
+                            <i class="fas fa-brain"></i>
+                            <div>
+                                <strong>GEMINI_API_KEY</strong>
+                                <p>Google Gemini Pro for advanced image/video analysis</p>
+                            </div>
+                        </div>
+                        <div class="api-item">
+                            <i class="fas fa-newspaper"></i>
+                            <div>
+                                <strong>NEWSAPI_KEY</strong>
+                                <p>NewsAPI for news verification and source checking</p>
+                            </div>
+                        </div>
+                        <div class="api-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <strong>FACTCHECK_API_KEY</strong>
+                                <p>Google Fact Check Tools API for claim verification</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="api-note">Add these keys to your <code>.env</code> file for full functionality</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- API Status Section - Bottom -->
+        <div class="bottom-api-status">
+            <div class="container">
+                <div class="api-status-toggle" onclick="toggleApiStatus()">
+                    <div class="toggle-header">
+                        <i class="fas fa-server"></i>
+                        <span>API Status</span>
+                        <i class="fas fa-chevron-up toggle-icon" id="api-toggle-icon"></i>
+                    </div>
+                    <div class="status-summary" id="status-summary">
+                        <div class="summary-indicators">
+                            <div class="summary-indicator checking" id="summary-gemini"></div>
+                            <div class="summary-indicator checking" id="summary-newsapi"></div>
+                            <div class="summary-indicator checking" id="summary-factcheck"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed API Status (Hidden by default) -->
+                <div class="api-status-details hidden" id="api-status-details">
+                    <div class="status-grid">
+                        <div class="status-item" id="gemini-status">
+                            <i class="fas fa-brain"></i>
+                            <span class="status-label">Gemini AI</span>
+                            <span class="status-text">Checking...</span>
+                            <div class="status-indicator checking"></div>
+                        </div>
+                        <div class="status-item" id="newsapi-status">
+                            <i class="fas fa-newspaper"></i>
+                            <span class="status-label">NewsAPI</span>
+                            <span class="status-text">Checking...</span>
+                            <div class="status-indicator checking"></div>
+                        </div>
+                        <div class="status-item" id="factcheck-status">
+                            <i class="fas fa-check-circle"></i>
+                            <span class="status-label">FactCheck</span>
+                            <span class="status-text">Checking...</span>
+                            <div class="status-indicator checking"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="/health" target="_blank">
+                        <i class="fas fa-heartbeat"></i>
+                        Health Check
+                    </a>
+                    <a href="/docs" target="_blank">
+                        <i class="fas fa-book"></i>
+                        API Docs
+                    </a>
+                </div>
+                <p>&copy; 2024 AI Misinformation & Deepfake Detector. Built with FastAPI, Google Gemini Pro & Python.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
